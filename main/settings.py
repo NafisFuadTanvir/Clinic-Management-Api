@@ -80,16 +80,19 @@ WSGI_APPLICATION = 'main.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
 
+
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'clinic_db',
         'USER': 'nafis',
         'PASSWORD': 'nafis',
-        'HOST': 'db',
-        'PORT': '5432',
+        'HOST': 'localhost', 
+        'PORT': '5456',
     }
 }
+
 
 
 # Password validation
@@ -144,3 +147,5 @@ SIMPLE_JWT = {
     "ACCESS_TOKEN_LIFETIME": timedelta(minutes=60),
     "REFRESH_TOKEN_LIFETIME": timedelta(days=1),
 }
+
+AUTH_USER_MODEL = 'clinic_management.User'

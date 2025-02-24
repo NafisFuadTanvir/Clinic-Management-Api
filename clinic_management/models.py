@@ -27,3 +27,20 @@ class Appointment(models.Model):
     doctor = models.ForeignKey(Doctor, on_delete=models.CASCADE)
     appointment_date = models.DateField()
     appointment_time = models.TimeField(unique=True)
+
+
+class Prescription(models.Model):
+    patient = models.ForeignKey(Patient, on_delete=models.CASCADE)
+    doctor = models.ForeignKey(Doctor, on_delete=models.CASCADE)
+    medicine = models.CharField(max_length=255)
+    dosage = models.CharField(max_length=255)
+
+class MedicineInventory(models.Model):
+    name = models.CharField(max_length=255, unique=True)
+    stock = models.IntegerField()
+    price_per_unit = models.FloatField()
+
+class PrescribedMedicine(models.Model):
+    prescription = models.ForeignKey(Prescription, on_delete=models.CASCADE)
+    medicine = models.ForeignKey(MedicineInventory, on_delete=models.CASCADE)
+    quantity = models.IntegerField()            
