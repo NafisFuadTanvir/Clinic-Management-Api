@@ -1,0 +1,18 @@
+services:
+  db:
+    image: postgres:latest
+    container_name: clinic_db
+    environment:
+      POSTGRES_USER: nafis
+      POSTGRES_PASSWORD: nafis
+      POSTGRES_DB: clinic_db
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    ports:
+      - "5456:5432"
+    restart: always
+   
+ 
+volumes:
+  postgres_data:
+    driver: local
