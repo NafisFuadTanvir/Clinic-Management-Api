@@ -32,7 +32,9 @@ class Appointment(models.Model):
     patient = models.ForeignKey(Patient, on_delete=models.CASCADE)
     doctor = models.ForeignKey(Doctor, on_delete=models.CASCADE)
     appointment_date = models.DateField()
-    appointment_time = models.TimeField(unique=True)
+    appointment_time = models.TimeField()
+    class Meta:
+        unique_together = ('doctor', 'appointment_time')
 
 
 class Prescription(models.Model):
@@ -40,6 +42,7 @@ class Prescription(models.Model):
     doctor = models.ForeignKey(Doctor, on_delete=models.CASCADE)
     medicine = models.CharField(max_length=255)
     dosage = models.CharField(max_length=255)
+    
 
 class MedicineInventory(models.Model):
     name = models.CharField(max_length=255, unique=True)

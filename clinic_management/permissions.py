@@ -11,3 +11,7 @@ class IsDoctor(permissions.BasePermission):
 class IsPatient(permissions.BasePermission):
     def has_permission(self, request, view):
         return request.user.is_authenticated and request.user.role == 'patient'
+
+class IsDoctorOwner(permissions.BasePermission):
+    def has_object_permission(self, request, view, obj):
+        return request.user.is_authenticated and request.user.role == 'doctor' and obj.user == request.user

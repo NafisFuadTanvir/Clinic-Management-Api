@@ -1,8 +1,13 @@
 from rest_framework import generics
 from rest_framework.permissions import IsAuthenticated
-from .permissions import IsAdmin,IsDoctor,IsPatient
+from .permissions import IsAdmin,IsDoctor,IsPatient,IsDoctorOwner
 from .models import Doctor,Patient,Appointment,Prescription
 from .serializers import *
+
+
+class UserRegistrationView(generics.CreateAPIView):
+    serializer_class = UserRegistrationSerializer
+
 
 class DoctorListCreateView(generics.ListCreateAPIView):
     queryset = Doctor.objects.all()
@@ -12,7 +17,7 @@ class DoctorListCreateView(generics.ListCreateAPIView):
 class DoctorDetailView(generics.RetrieveUpdateDestroyAPIView):
     queryset = Doctor.objects.all()
     serializer_class = DoctorSerializer
-    permission_classes = [IsAuthenticated, IsAdmin]
+    permission_classes = [IsAuthenticated,IsDoctorOwner]
 
 class PatientListCreateView(generics.ListCreateAPIView):
     queryset = Patient.objects.all()
